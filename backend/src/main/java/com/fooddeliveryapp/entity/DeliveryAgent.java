@@ -4,25 +4,21 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class DeliveryAgent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long agentId;
 
     private String name;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    private String password;
-
     private String phone;
 
-    private String role;
-    // CUSTOMER, ADMIN, DELIVERY
+    private String vehicleNumber;
+
+    private String status;
+    // AVAILABLE, BUSY, OFFLINE
 }

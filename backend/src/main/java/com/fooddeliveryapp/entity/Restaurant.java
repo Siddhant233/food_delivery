@@ -4,25 +4,20 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long restaurantId;
 
     private String name;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    private String password;
+    private String location;
 
     private String phone;
 
-    private String role;
-    // CUSTOMER, ADMIN, DELIVERY
+    private Double rating;
 }
