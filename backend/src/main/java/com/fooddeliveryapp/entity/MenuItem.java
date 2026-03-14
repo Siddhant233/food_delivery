@@ -21,6 +21,14 @@ public class MenuItem {
 
     private Boolean available;
 
+    private Integer calories;
+
+    private Double proteinGrams;
+
+    private Double carbsGrams;
+
+    private Double fatGrams;
+
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;

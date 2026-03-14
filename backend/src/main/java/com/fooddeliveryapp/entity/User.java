@@ -25,4 +25,14 @@ public class User {
 
     private String role;
     // CUSTOMER, ADMIN, DELIVERY
+
+    private Integer age;
+
+    private Double weightKg;
+
+    private String fitnessGoal;
+
+    private String dietPreference;
+
+    private Integer dailyCalorieTarget;
 }

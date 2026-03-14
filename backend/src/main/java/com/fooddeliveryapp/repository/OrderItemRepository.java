@@ -9,4 +9,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
 
     List<OrderItem> findByOrderOrderId(Long orderId);
 
+    List<OrderItem> findByOrderUserUserIdAndOrderOrderTimeBetween(Long userId,
+                                                                  java.time.LocalDateTime start,
+                                                                  java.time.LocalDateTime end);
 }
