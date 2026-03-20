@@ -13,14 +13,8 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long orderId;
-
-    private Double totalAmount;
-
-    private String status;
-    // PLACED, PREPARING, OUT_FOR_DELIVERY, DELIVERED
-
-    private LocalDateTime orderTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,4 +27,13 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @Column(name = "total_amount")
+    private Double totalAmount;
+
+    @Column(name = "order_status")
+    private String orderStatus;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "categories")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,11 +12,9 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "category_id")
     private Long categoryId;
 
-    private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "restaurant_id")
-    private Restaurant restaurant;
+    @Column(name = "category_name")
+    private String categoryName;
 }

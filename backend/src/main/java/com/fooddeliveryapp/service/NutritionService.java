@@ -36,13 +36,13 @@ public class NutritionService {
         String goal = normalize(profile.getGoal());
         String diet = normalize(profile.getDiet());
 
-        List<RecommendedMenuItemDTO> recommendations = menuItemRepository.findByAvailableTrue().stream()
+        List<RecommendedMenuItemDTO> recommendations = menuItemRepository.findByIsAvailableTrue().stream()
                 .filter(item -> item.getCalories() != null)
                 .sorted(Comparator.comparingInt(item -> scoreItem(item, goal, diet, targetCalories)))
                 .limit(3)
                 .map(item -> new RecommendedMenuItemDTO(
-                        item.getMenuItemId(),
-                        item.getName(),
+                    item.getMenuItemId(),
+                    item.getItemName(),
                         item.getDescription(),
                         item.getPrice(),
                         item.getCalories(),
@@ -72,7 +72,7 @@ public class NutritionService {
         mealCalories.put("Snacks", 0);
 
         int consumedCalories = 0;
-        for (OrderItem orderItem : orderItemRepository.findByOrderUserUserIdAndOrderOrderTimeBetween(userId, start, end)) {
+        for (OrderItem orderItem : orderItemRepository.findByOrderUserUserIdAndOrderCreatedAtBetween(userId, start, end)) {
             if (orderItem.getMenuItem() == null || orderItem.getMenuItem().getCalories() == null) {
                 continue;
             }
@@ -80,7 +80,7 @@ public class NutritionService {
             int itemCalories = orderItem.getMenuItem().getCalories() * safeQuantity(orderItem.getQuantity());
             consumedCalories += itemCalories;
 
-            String mealSlot = resolveMealSlot(orderItem.getOrder().getOrderTime());
+            String mealSlot = resolveMealSlot(orderItem.getOrder().getCreatedAt());
             mealCalories.put(mealSlot, mealCalories.get(mealSlot) + itemCalories);
         }
 
@@ -106,7 +106,7 @@ public class NutritionService {
         double protein = safeDouble(item.getProteinGrams());
         double carbs = safeDouble(item.getCarbsGrams());
         double fat = safeDouble(item.getFatGrams());
-        String itemText = (safeString(item.getName()) + " " + safeString(item.getDescription())).toLowerCase(Locale.ROOT);
+        String itemText = (safeString(item.getItemName()) + " " + safeString(item.getDescription())).toLowerCase(Locale.ROOT);
 
         if (goal.contains("weight loss")) {
             score += item.getCalories();

@@ -5,6 +5,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "reviews")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,13 +13,8 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "review_id")
     private Long reviewId;
-
-    private Integer rating;
-
-    private String comment;
-
-    private LocalDateTime reviewTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -27,4 +23,11 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
+
+    private Integer rating;
+
+    private String comment;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 }

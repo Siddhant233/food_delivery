@@ -1,9 +1,10 @@
 package com.fooddeliveryapp.entity;
 
 import jakarta.persistence.*;
-        import lombok.*;
+import lombok.*;
 
 @Entity
+@Table(name = "cart_items")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,15 +12,16 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_item_id")
     private Long cartItemId;
-
-    private Integer quantity;
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
     @ManyToOne
-    @JoinColumn(name = "menu_item_id")
+    @JoinColumn(name = "item_id")
     private MenuItem menuItem;
+
+    private Integer quantity;
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
+@Table(name = "addresses")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -11,7 +12,12 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "address_id")
     private Long addressId;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     private String street;
 
@@ -21,7 +27,7 @@ public class Address {
 
     private String pincode;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Double latitude;
+
+    private Double longitude;
 }

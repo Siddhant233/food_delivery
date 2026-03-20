@@ -31,6 +31,9 @@ public class OrderService {
         // Save the delivery string as a new Address entity attached to the User
         Address address = new Address();
         address.setStreet(dto.getDeliveryAddress());
+        address.setCity(""); // default to empty
+        address.setState(""); // default to empty
+        address.setPincode(""); // default to empty
         address.setUser(user);
         address = addressRepository.save(address);
 
@@ -40,8 +43,8 @@ public class OrderService {
         order.setRestaurant(restaurant);
         order.setAddress(address);
         order.setTotalAmount(dto.getTotalAmount());
-        order.setStatus("PLACED");
-        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus("PLACED");
+        order.setCreatedAt(LocalDateTime.now());
         
         Order savedOrder = orderRepository.save(order);
 
@@ -67,4 +70,4 @@ public class OrderService {
     public List<Order> getUserOrders(Long userId) {
         return orderRepository.findByUserUserId(userId);
     }
-}
+}
