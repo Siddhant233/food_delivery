@@ -6,6 +6,11 @@ CREATE TABLE users (
     password TEXT NOT NULL,
     phone VARCHAR(15),
     role VARCHAR(20) CHECK (role IN ('CUSTOMER','ADMIN','RESTAURANT_OWNER','DELIVERY_AGENT')),
+    age INT,
+    weight_kg DECIMAL(5,2),
+    fitness_goal VARCHAR(50),
+    diet_preference VARCHAR(50),
+    daily_calorie_target INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -49,6 +54,10 @@ CREATE TABLE menu_items (
     item_name VARCHAR(150),
     description TEXT,
     price DECIMAL(10,2),
+    calories INT,
+    protein_grams DECIMAL(6,2),
+    carbs_grams DECIMAL(6,2),
+    fat_grams DECIMAL(6,2),
     is_available BOOLEAN DEFAULT TRUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
