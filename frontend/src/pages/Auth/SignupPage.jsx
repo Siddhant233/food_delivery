@@ -50,7 +50,8 @@ const SignupPage = () => {
     const result = await register(payload);
     if (!result.error) {
       toast.success("Welcome to BiteRush! 🎉");
-      navigate("/");
+      // need to check this to redirect to /login and not to home page on signup.
+      navigate("/login");
     }
   };
 
